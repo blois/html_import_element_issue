@@ -13,6 +13,10 @@
     l.addEventListener('load', function() {
       window.console.log(window.location + ' loaded import of ' + l.href + ' (' + l.import.readyState + ')');
 
+      l.import.addEventListener('readystatechange', function() {
+        window.console.log(window.location + ' import doc is now ' + l.import.readyState);
+      }, false);
+
       var foo = document.querySelector('x-foo');
       if (!foo.wasUpgraded) {
         window.console.log(window.location + ' x-foo has not been upgraded!!!');

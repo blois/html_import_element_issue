@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="import" href="parts/foo.html">
+    <script> // A script is needed here for repro. </script>
+  </head>
+  <body>
+
+  <x-foo location="frame.html"></x-foo>
+
+  <script>
+    var l = document.querySelector('link');
+    l.addEventListener('load', function() {
+      window.console.log(window.location + ' loaded import of ' + l.href + ' (' + l.import.readyState + ')');
+
+      var foo = document.querySelector('x-foo');
+      if (!foo.wasUpgraded) {
+        window.console.log(window.location + ' x-foo has not been upgraded!!!');
+      } else {
+        window.console.log(window.location + ' x-foo was correctly upgraded');
+      }
+    }, false);
+  </script>
+  </body>
+</html>
